@@ -1,0 +1,131 @@
+<?php
+
+
+namespace EduBoxBundle\Controller;
+
+
+use Application\Sonata\MediaBundle\Entity\Media;
+use EduBoxBundle\Entity\Author;
+use EduBoxBundle\Entity\Book;
+use Endroid\QrCode\QrCode;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Router;
+
+class BookController extends Controller
+{
+    /**
+     *
+     * @Route(path="/book/list", name="edubox_book_list")
+     */
+    public function listAction(Request $request)
+    {
+        $books = $this->getDoctrine()->getRepository('EduBoxBundle:Book')->createQueryBuilder('b');
+
+        $categoryId = (int)$request->get('category');
+        $authorId = (int)$request->get('author');
+        $search = $request->get('search');
+
+        if ($categoryId > 0) {
+            $books->leftJoin('b.categories', 'c')
+                ->where('c.id = :categoryId')->setParameter('categoryId', $categoryId);
+        }
+
+        if ($authorId > 0) {
+            $books->leftJoin('b.authors', 'a')
+                ->where('a.id = :authorId')->setParameter('authorId', $authorId);
+        }
+
+        if (strlen($search) > 0) {
+            $books
+                ->andWhere(
+                    $books->expr()->like('CONCAT(lower(b.name),lower(b.description))', $books->expr()->literal('%'.$search.'%'))
+                );
+        } else {
+            $search = null;
+        }
+
+        $categories = $this->getDoctrine()->getRepository('ApplicationSonataClassificationBundle:Category')->findBy(['context' => 'book']);
+        $authors = $this->getDoctrine()->getRepository('EduBoxBundle:Author')->findAll();
+        return $this->render('@EduBox/Front/book/list.html.twig', [
+            'books' => $books->getQuery()->getResult(),
+            'categories' =>  $categories,
+            'authors' => $authors,
+            'categoryId' => $categoryId,
+            'authorId' => $authorId,
+            'search' => $search,
+        ]);
+    }
+
+    /**
+     * @param Book $book
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route(path="/book/{id}", name="edubox_book_show")
+     */
+    public function showAction(Book $book)
+    {
+        return $this->render('@EduBox/Front/book/show.html.twig', [
+            'book' => $book,
+            'bookManager' => $this->get('edubox_book_manager'),
+        ]);
+    }
+
+    /**
+     * @param Book $book
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route(path="/book/{id}/download", name="edubox_book_download")
+     */
+    public function downloadAction(Book $book)
+    {
+        $strAuthors = '';
+        $authors = $book->getAuthors();
+        foreach ($authors as $key => $author) {
+            if ($author instanceof Author) {
+                $strAuthors .= $author->getFullName();
+                $strAuthors .= ", ";
+            }
+        }
+        if (count($authors) > 0) {
+            $strAuthors = rtrim($strAuthors, ", ");
+        }
+        $bookName = strlen($book->getName().'-'.$strAuthors) > 220 ? $book->getName() : $book->getName().'-'.$strAuthors;
+        if ($book->getBookFile() instanceof Media)
+            return $this->get('sonata.media.provider.file')
+                ->getDownloadResponse($book->getBookFile(), 'reference', 'http', [
+                    'Content-Disposition' => sprintf('attachment; filename="%s"', $bookName.'.'.$book->getBookFile()->getExtension()),
+                ]);
+        else throw $this->createNotFoundException();
+    }
+
+
+    /**
+     * @param Book $book
+     * @return Response
+     * @throws \Endroid\QrCode\Exception\InvalidWriterException
+     * @Route(path="/book/{id}/qrcode", name="edubox_book_qrcode")
+     */
+    public function getQrCode(Book $book)
+    {
+        $qrCode = new QrCode();
+        $qrCode->setText($this->generateUrl('edubox_book_show', ['id' => $book->getId()], Router::ABSOLUTE_URL));
+        $response = new Response($qrCode->writeString());
+        $response->headers->set('Content-Type', $qrCode->getContentType());
+        return $response;
+    }
+
+
+    /**
+     * @param Book $book
+     * @Route(path="/book/{id}/read", name="edubox_dook_read")
+     */
+    public function readAction(Book $book)
+    {
+
+    }
+
+
+}

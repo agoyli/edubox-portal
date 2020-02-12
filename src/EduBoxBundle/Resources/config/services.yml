@@ -1,0 +1,60 @@
+services:
+  edubox_admin_resource:
+    class: EduBoxBundle\Admin\ResourceAdmin
+    arguments: [~, EduBoxBundle\Entity\Resource, ~]
+    tags:
+      - name: sonata.admin
+        manager_type: orm
+        label: 'Resources'
+        group: 'Resources'
+        on_top: true
+
+  edubox_admin_book:
+    class: EduBoxBundle\Admin\BookAdmin
+    arguments: [~, EduBoxBundle\Entity\Book, ~]
+    tags:
+      - name: sonata.admin
+        manager_type: orm
+        label: 'Books'
+        group: 'Books'
+        on_top: true
+
+  edubox_admin_author:
+    class: EduBoxBundle\Admin\AuthorAdmin
+    arguments: [~, EduBoxBundle\Entity\Author, ~]
+    tags:
+      - name: sonata.admin
+        manager_type: orm
+        label: 'Authors'
+        group: 'Authors'
+        on_top: true
+
+  edubox_admin_problem:
+    class: EduBoxBundle\Admin\ProblemAdmin
+    arguments: [~, EduBoxBundle\Entity\Problem, ~]
+    tags:
+      - name: sonata.admin
+        manager_type: orm
+        label: 'Problems'
+        group: 'Problems'
+        on_top: true
+
+  edubox_admin_problem_test:
+    class: EduBoxBundle\Admin\ProblemTestAdmin
+    arguments: [~, EduBoxBundle\Entity\ProblemTest, ~]
+    tags:
+      - name: sonata.admin
+        manager_type: orm
+        show_in_dashboard: false
+
+  edubox_submission_manager:
+    class: EduBoxBundle\DomainManager\SubmissionManager
+    arguments: ['@doctrine.orm.entity_manager']
+
+  edubox_book_manager:
+    class: EduBoxBundle\DomainManager\BookManager
+    arguments: ['@doctrine.orm.entity_manager', '@kernel', '@router']
+
+  edubox_code_submit_handler:
+    class: EduBoxBundle\Form\CodeSubmitHandler
+    arguments: ['@edubox_submission_manager']

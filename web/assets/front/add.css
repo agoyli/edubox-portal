@@ -1,0 +1,9 @@
+.book-image {
+    background-size: cover;
+    position: relative;
+    padding-bottom: 140% !important;
+}
+
+#ace-editor {
+    height: 400px;
+}

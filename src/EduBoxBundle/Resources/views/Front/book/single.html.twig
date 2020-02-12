@@ -1,0 +1,21 @@
+<div class="col-md-3 col-sm-6">
+    <a href="{{ path('edubox_book_show', {'id': book.id}) }}">
+        <div class="box box-primary box-solid">
+            <!-- /.box-header -->
+            <div class="box-body no-padding book-image" style="background-image: url({% if book.bookImage.size is defined %}{% path book.bookImage, 'reference' %}{% else %}{{ asset('uploads/media/book.jpg') }}{% endif %});">
+            </div>
+            <!-- /.box-body -->
+            <div class="box-header">
+                <h3 class="box-title">
+                    {{ book.name }}
+                    {% for author in book.authors %}
+                        {% if loop.first %} - {% endif %}{{ author.fullName }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </h3>
+                <div class="box-tools pull-right">
+                    <span data-toggle="tooltip" title="" class="badge bg-blue-active" style="bottom: 35px;">{{ book.pageCount }}</span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

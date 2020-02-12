@@ -1,0 +1,88 @@
+{% extends '@EduBox/front_layout.html.twig' %}
+
+{% set title = 'Kitap: '~book.name %}
+
+{% block front_title %}{{  parent() }} / {{ title }}{% endblock %}
+
+{% block content_header %}
+    <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block front_content %}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="box box-primary">
+                <div class="box-body no-padding">
+                    {% if book.bookImage.size is defined %}
+                        <img src="{% path book.bookImage, 'reference' %}" alt="" width="100%">
+                    {% else %}
+                        <img src="{{ asset('uploads/media/book.jpg') }}" alt="" width="100%">
+                    {% endif %}
+                </div>
+                {% if book.bookFile.size is defined %}
+                    <div class="box-header with-border">
+                        <a class="btn btn-primary" href="{{ path('edubox_book_download', {'id': book.id}) }}" download="">
+                            Ýükle ({{ (book.bookFile.size/1024/1024)|round(1) }} MB) <i class="fa fa-download"></i>
+                        </a>
+                        <a class="btn btn-primary" href="{{ path('edubox_dook_read', {'id': book.id}) }}">
+                            Oka <i class="fa fa-eye"></i>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="box box-primary box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Kitap barada</h3>
+                </div>
+                <div class="box-body">
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>Ady</b>
+                            <a class="pull-right">
+                                {{ book.name }}
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Awtor</b>
+                            <a class="pull-right">
+                                {% for author in book.authors %}
+                                    {{ author.fullName }}{% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Sahypa sany</b>
+                            <a class="pull-right">
+                                {{ book.pageCount }}
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Ýyl</b>
+                            <a class="pull-right">
+                                {{ book.year }}
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Annotasiýa</b>
+                            <p>
+                                {{ book.description }}
+                            </p>
+                        </li>
+                        <li class="list-group-item">
+                            <b>QR code</b>
+                            <p>
+                                <img src="{{ path('edubox_book_qrcode', {'id': book.id}) }}" alt="">
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{#
+                        {% for author in book.authors %}
+                            {% if loop.first %} - {% endif %}{{ author.fullName }}{% if not loop.last %}, {% endif %}
+                        {% endfor %}#}

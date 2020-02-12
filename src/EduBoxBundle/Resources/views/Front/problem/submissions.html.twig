@@ -1,0 +1,66 @@
+{% extends '@EduBox/front_layout.html.twig' %}
+
+
+{% block content_header %}
+    <h1>
+        Iberilen kodlar
+    </h1>
+{% endblock %}
+
+{% block front_content %}
+    <div class="box box-primary box-solid">
+        <div class="box-header">
+            <div class="box-title">
+                Iberilen kodlar sanawy
+            </div>
+            <div class="box-tools pull-right">
+                <div class="btn-group">
+                    <a href="{{ path('edubox_problem_submissions', {'type': 'all'}) }}" class="btn btn-primary btn-sm {% if not me %}active{% endif %}">
+                        All
+                    </a>
+                    <a href="{{ path('edubox_problem_submissions', {'type': 'me'}) }}" class="btn btn-primary btn-sm {% if me %}active{% endif %}">
+                        Me
+                    </a>
+                </div>
+                <button class="btn btn-primary btn-sm active">
+                    <i class="fa fa-refresh"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table bordered-table">
+                <thead>
+                    <tr>
+                        <th>Problem</th>
+                        <th>User</th>
+                        <th>Language</th>
+                        <th>Status</th>
+                        <th>Time</th>
+                        <th>Memory</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for submission in submissions %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edubox_problem_show', {'id': submission.problem.id}) }}">
+                                {{ submission.problem.name }}
+                            </a>
+                        </td>
+                        <td>{{ submission.user.username }}</td>
+                        <td>{{ submission.languageName }}</td>
+                        <td>
+
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="overlay" hidden>
+            <i class="fa fa-refresh fa-spin"></i>
+        </div>
+    </div>
+{% endblock %}

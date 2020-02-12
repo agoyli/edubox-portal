@@ -1,0 +1,37 @@
+{% block examples_json_widget %}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <!--<th>Delete</th>-->
+            <th>
+                Input
+            </th>
+            <th>
+                Output
+            </th>
+        </tr>
+        </thead>
+        <tbody class="sonata-ba-tbody">
+        {% for example in form.children['examples'] if not example.rendered %}
+            <tr>
+                <!--<td class="control-group">
+                    <a href="javascript:void(0)" onclick="" class="btn btn-success btn-sm sonata-ba-action" title="Add new">
+                        <i class="fa fa-trash"></i>
+                        Delete
+                    </a>
+                </td>-->
+                <td class="control-group">
+                    {{ form_widget(example.input) }}
+                </td>
+                <td class="control-group">
+                    {{ form_widget(example.output) }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <!--<a href="javascript:void(0)" onclick="" class="btn btn-success btn-sm sonata-ba-action" title="Add new">
+        <i class="fa fa-plus-circle"></i>
+        Add new
+    </a>-->
+{% endblock %}

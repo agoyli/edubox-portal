@@ -1,0 +1,87 @@
+{% extends '@EduBox/front_layout.html.twig' %}
+
+{% set title = 'Kitaphana' %}
+
+{% block front_title %}{{  parent() }} / {{ title }}{% endblock %}
+
+{% block content_header %}
+    <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block front_content %}
+    <div class="row">
+        <div class="col-md-9">
+            {% for book in books %}
+                {% include '@EduBox/Front/book/single.html.twig' with {'book': book} only %}
+            {% endfor %}
+        </div>
+
+        <div class="col-md-3">
+            <div class="box box-primary box-solid">
+                <div class="box-header">
+                    <div class="box-title">
+                        Süzgüçler
+                    </div>
+                </div>
+                <div class="box-body">
+                    <form action="{{ path(app.request.attributes.get('_route')) }}">
+                        <div class="form-group">
+                            <label for="">Gözleg</label>
+                            <input type="text" name="search" class="form-control" value="{{ search }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Kategoriýa</label>
+                            <select class="form-control" name="category" onchange="this.form.submit()">
+                                <option value="0">Ählisi</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}" {% if categoryId == category.id %}selected{% endif %} >{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Awtor</label>
+                            <select class="form-control" name="author" onchange="this.form.submit()">
+                                <option value="0">Ählisi</option>
+                                {% for author in authors %}
+                                    <option value="{{ author.id }}" {% if authorId == author.id %}selected{% endif %} >{{ author.fullName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Süz</button>
+                            <a href="{{ path(app.request.attributes.get('_route')) }}" class="btn btn-warning">Täzele</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="box box-primary box-solid">
+                <div class="box-header">
+                    <div class="box-title">
+                        QR kod arkaly gözleg
+                    </div>
+                </div>
+                <div class="box-body">
+                    <script type="text/javascript"  src="{{ asset('assets/libs/instascan/instascan.min.js') }}"></script>
+                    <video id="instascancam"></video>
+                    <script type="text/javascript">
+                        let scanner = new Instascan.Scanner({ video: document.getElementById('instascancam') });
+                        scanner.addListener('scan', function (content) {
+                            console.log(content);
+                        });
+                        Instascan.Camera.getCameras().then(function (cameras) {
+                            if (cameras.length > 0) {
+                                scanner.start(cameras[0]);
+                            } else {
+                                console.error('No cameras found.');
+                            }
+                        }).catch(function (e) {
+                            console.error(e);
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

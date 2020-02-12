@@ -1,0 +1,54 @@
+<header class="main-header">
+    <nav class="navbar navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="{{ path('homepage') }}" class="navbar-brand"><b>Edu</b>Box</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                {{ knp_menu_render('EduBoxBundle:Builder:mainMenu',
+                    {'template':'@EduBoxBundle/Resources/views/Front/Block/menu.html.twig'}
+                ) }}
+            </div>
+            <!-- /.navbar-collapse -->
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    {% if is_granted('ROLE_USER') %}
+                        <li>
+                            <a href="{{ path('sonata_admin_dashboard') }}">
+                                Panele geç <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </li>
+                        <li class="dropdown user user-menu">
+
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                {{ app.user.username }} <i class="fa fa-caret-down" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% include '@EduBox/Admin/Core/user_block.html.twig' %}
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path('fos_user_security_login') }}">
+                                Giriş
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('fos_user_registration_register') }}">
+                                Agza bolmak
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <!-- /.navbar-custom-menu -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+</header>

@@ -1,0 +1,169 @@
+{% extends '@EduBox/front_layout.html.twig' %}
+
+{% set title = 'Mesele: '~problem.name %}
+
+{% block front_title %}{{  parent() }} / {{ title }}{% endblock %}
+
+{% block content_header %}
+    <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block front_content %}
+    <div class="row">
+        <div class="col-md-9">
+            <div class="box box-primary box-solid">
+                <div class="box-header">
+                    <div class="box-title">
+                        Mazmuny
+                    </div>
+                </div>
+                <div class="box-body">
+                    {{ problem.description|raw }}
+                </div>
+            </div>
+            <div class="box box-primary box-solid">
+                <div class="box-header">
+                    <div class="box-title">
+                        Nusga
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <table class="table bordered-table">
+                        <thead>
+                            <th>Giriş</th>
+                            <th>Çykyş</th>
+                        </thead>
+                        <tbody>
+                        {% for test in problem.tests %}
+                            {% if loop.index < 4 %}
+                                <tr>
+                                    <td><pre>{{ test.input }}</pre></td>
+                                    <td><pre>{{ test.output }}</pre></td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="box box-primary box-solid" id="code_submit_box">
+                <div class="overlay" hidden="hidden">
+                    <i class="fa fa-refresh fa-spin"></i>
+                </div>
+                <div class="box-header">
+                    <div class="box-title">
+                        Jogabyny ibermek
+                    </div>
+                </div>
+                <div class="box-body">
+                    {% if is_granted('ROLE_USER') %}
+                        {{ form_start(codeForm, {'attr':{'id':'code_submit'}}) }}
+                            <div class="form-group">
+                                {{ form_row(codeForm.language, {'attr':{'class': 'form-control'} }) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(codeForm.code, {'attr':{'class': 'form-control', 'style':'resize: vertical;', 'rows': '20', 'hidden': 'hidden'} }) }}
+                                <pre id="ace-editor"></pre>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" id="code_submit_submit">Iber</button>
+                                <button type="button" class="btn btn-primary" id="code_submit_reload" onclick="window.location.reload();" style="display: none">Täzele</button>
+                            </div>
+                        {{ form_end(codeForm) }}
+                    {% else %}
+                        <div class="alert alert-warning alert-dismissible">
+                            <h4><i class="icon fa fa-warning"></i> Kod ibermek diňe agzalar üçin elýeter.</h4>
+                                Kod ibermek üçin öz hasabyňyza <a href="{{ path('fos_user_security_login') }}">giriň</a> ýa-da
+                            <a href="{{ path('fos_user_registration_register') }}">agza boluň</a>.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="box box-primary box-solid" id="submission_box" hidden="hidden">
+                <div class="box-header">
+                    <div class="box-title">Netije</div>
+                </div>
+                <div class="box-body no-padding">
+                    <table class="table bordered-table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Giriş</th>
+                            <th>Jogaby</th>
+                            <th>Çykyş</th>
+                            <th>Wagt</th>
+                            <th>Ýat</th>
+                            <th>Netije</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% if problem.tests[0] is defined %}
+                                <tr class="execution-result">
+                                    <td class="execution-test" data-id="{{ problem.tests[0].id }}">1</td>
+                                    <td class="execution-input">
+                                        <pre>{{ problem.tests[0].input }}</pre>
+                                    </td>
+                                    <td class="execution-expected">
+                                        <pre>{{ problem.tests[0].output }}</pre>
+                                    </td>
+                                    <td class="execution-output">
+                                        <i class="fa fa-refresh fa-spin"></i>
+                                    </td>
+                                    <td class="execution-time"></td>
+                                    <td class="execution-memory"></td>
+                                    <td class="execution-status"></td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="box box-primary box-solid">
+                <div class="box-header">
+                    <div class="box-title">
+                        Mesele barada
+                    </div>
+                </div>
+                <div class="box-body">
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>Kategoriýalar:</b>
+                            <p>
+                                {% for category in problem.categories %}
+                                    {{ category.name }}
+                                    {% if not loop.last %}, {% endif %}
+                                {% else %}
+                                    -
+                                {% endfor %}
+                            </p>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Tegler</b>
+                            <p>
+                                -
+                            </p>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Wagt çäklendirme</b>
+                            <p class="pull-right">
+                                5s
+                            </p>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Ýat çäklendirme</b>
+                            <p class="pull-right">
+                                128mb
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ asset('assets/libs/ace/ace-builds-master/src-min/ace.js') }}"></script>
+    <script src="{{ asset('assets/libs/ace/ace-builds-master/src-min/theme-monokai.js') }}"></script>
+    <script src="{{ asset('assets/libs/ace/ace-builds-master/src-min/mode-python.js') }}"></script>
+{% endblock %}

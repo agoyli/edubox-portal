@@ -1,0 +1,78 @@
+{% extends '@EduBox/front_layout.html.twig' %}
+
+{% set title = 'Maglumatlar' %}
+
+{% block front_title %}{{  parent() }} / {{ title }}{% endblock %}
+
+{% block content_header %}
+    <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block front_content %}
+    <div class="row">
+        <div class="col-md-9">
+            <div class="box box-primary box-solid">
+                <div class="box-header">
+                    <div class="box-title">
+                        Maglumatlar sanawy
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <table class="table table-bordered">
+                        <thead>
+                        <th>
+                            Ady
+                        </th>
+                        </thead>
+                        <tbody>
+                        {% for resource in resources %}
+                            {% include '@EduBox/Front/resource/single.html.twig' with {'resource': resource} only %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="box box-primary box-solid">
+                <div class="box-header">
+                    <div class="box-title">
+                        Süzgüçler
+                    </div>
+                </div>
+                <div class="box-body">
+                    <form action="{{ path(app.request.attributes.get('_route')) }}">
+                        <div class="form-group">
+                            <label for="">Gözleg</label>
+                            <input type="text" name="search" class="form-control" value="{{ search }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Kategoriýa</label>
+                            <select class="form-control" name="category" onchange="this.form.submit()">
+                                <option value="0">Ählisi</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}" {% if categoryId == category.id %}selected{% endif %} >{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tegler</label>
+                            <select class="form-control" name="tag" onchange="this.form.submit()">
+                                <option value="0">Ählisi</option>
+                                {% for tag in tags %}
+                                    <option value="{{ tag.id }}" {% if tagId == tag.id %}selected{% endif %} >{{ tag.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Süz</button>
+                            <a href="{{ path(app.request.attributes.get('_route')) }}" class="btn btn-warning">Täzele</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
