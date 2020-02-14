@@ -23,7 +23,7 @@ class CodeSubmitType extends AbstractType
         $builder->add('language', ChoiceType::class, [
             'label' => 'Programmalaşdyrmak dili',
             'choices' => $languages,
-            'preferred_choices' => [34],
+            'preferred_choices' => [71],
         ]);
         $builder->add('code', TextareaType::class, [
             'label' => 'Kod',

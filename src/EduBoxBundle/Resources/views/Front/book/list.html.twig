@@ -83,7 +83,7 @@
                 </div>
                 <div class="box-body">
                     <script type="text/javascript"  src="{{ asset('assets/libs/instascan/instascan.min.js') }}"></script>
-                    <video id="instascancam"></video>
+                    <video id="instascancam" style="transform: scaleX(-1);width: 100%;"></video>
                     <script type="text/javascript">
                         let scanner = new Instascan.Scanner({ video: document.getElementById('instascancam') });
                         scanner.addListener('scan', function (content) {

@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Submission
 {
-    public static $languages = [
+    /**public static $languages = [
         1 => "Bash (4.4)",
         2 => "Bash (4.0)",
         3 => "Basic (fbc 1.05.0)",
@@ -57,6 +57,40 @@ class Submission
         42 => "Rust (1.20.0)",
         43 => "Text (plain text)",
         44 => "Executable",
+    ];**/
+    public static $languages = [
+        45 => "Assembly (NASM 2.14.02)",
+        46 => "Bash (5.0.0)",
+        47 => "Basic (FBC 1.07.1)",
+        48 => "C (GCC 7.4.0)",
+        52 => "C++ (GCC 7.4.0)",
+        49 => "C (GCC 8.3.0)",
+        53 => "C++ (GCC 8.3.0)",
+        50 => "C (GCC 9.2.0)",
+        54 => "C++ (GCC 9.2.0)",
+        51 => "C# (Mono 6.6.0.161)",
+        55 => "Common Lisp (SBCL 2.0.0)",
+        56 => "D (DMD 2.089.1)",
+        57 => "Elixir (1.9.4)",
+        58 => "Erlang (OTP 22.2)",
+        44 => "Executable",
+        59 => "Fortran (GFortran 9.2.0)",
+        60 => "Go (1.13.5)",
+        61 => "Haskell (GHC 8.8.1)",
+        62 => "Java (OpenJDK 13.0.1)",
+        63 => "JavaScript (Node.js 12.14.0)",
+        64 => "Lua (5.3.5)",
+        65 => "OCaml (4.09.0)",
+        66 => "Octave (5.1.0)",
+        67 => "Pascal (FPC 3.0.4)",
+        68 => "PHP (7.4.1)",
+        43 => "Plain Text",
+        69 => "Prolog (GNU Prolog 1.4.5)",
+        70 => "Python (2.7.17)",
+        71 => "Python (3.8.1)",
+        72 => "Ruby (2.7.0)",
+        73 => "Rust (1.40.0)",
+        74 => "TypeScript (3.7.4)",
     ];
 
     public static $statuses = [

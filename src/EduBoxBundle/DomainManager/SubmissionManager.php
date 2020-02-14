@@ -36,13 +36,16 @@ class SubmissionManager
 
     public function getHost()
     {
-        return 'http://s3.tmy.su:3000';
+        return 'https://api.judge0.com';
     }
 
     public function getLanguages()
     {
-        return json_decode(
+        /*return json_decode(
             '[{"id":1,"name":"Bash (4.4)"},{"id":2,"name":"Bash (4.0)"},{"id":3,"name":"Basic (fbc 1.05.0)"},{"id":4,"name":"C (gcc 7.2.0)"},{"id":5,"name":"C (gcc 6.4.0)"},{"id":6,"name":"C (gcc 6.3.0)"},{"id":7,"name":"C (gcc 5.4.0)"},{"id":8,"name":"C (gcc 4.9.4)"},{"id":9,"name":"C (gcc 4.8.5)"},{"id":10,"name":"C++ (g++ 7.2.0)"},{"id":11,"name":"C++ (g++ 6.4.0)"},{"id":12,"name":"C++ (g++ 6.3.0)"},{"id":13,"name":"C++ (g++ 5.4.0)"},{"id":14,"name":"C++ (g++ 4.9.4)"},{"id":15,"name":"C++ (g++ 4.8.5)"},{"id":16,"name":"C# (mono 5.4.0.167)"},{"id":17,"name":"C# (mono 5.2.0.224)"},{"id":18,"name":"Clojure (1.8.0)"},{"id":19,"name":"Crystal (0.23.1)"},{"id":20,"name":"Elixir (1.5.1)"},{"id":21,"name":"Erlang (OTP 20.0)"},{"id":22,"name":"Go (1.9)"},{"id":23,"name":"Haskell (ghc 8.2.1)"},{"id":24,"name":"Haskell (ghc 8.0.2)"},{"id":25,"name":"Insect (5.0.0)"},{"id":26,"name":"Java (OpenJDK 9 with Eclipse OpenJ9)"},{"id":27,"name":"Java (OpenJDK 8)"},{"id":28,"name":"Java (OpenJDK 7)"},{"id":29,"name":"JavaScript (nodejs 8.5.0)"},{"id":30,"name":"JavaScript (nodejs 7.10.1)"},{"id":31,"name":"OCaml (4.05.0)"},{"id":32,"name":"Octave (4.2.0)"},{"id":33,"name":"Pascal (fpc 3.0.0)"},{"id":34,"name":"Python (3.6.0)"},{"id":35,"name":"Python (3.5.3)"},{"id":36,"name":"Python (2.7.9)"},{"id":37,"name":"Python (2.6.9)"},{"id":38,"name":"Ruby (2.4.0)"},{"id":39,"name":"Ruby (2.3.3)"},{"id":40,"name":"Ruby (2.2.6)"},{"id":41,"name":"Ruby (2.1.9)"},{"id":42,"name":"Rust (1.20.0)"},{"id":43,"name":"Text (plain text)"},{"id":44,"name":"Executable"}]'
+        );*/
+        return json_decode(
+            '[{"id":45,"name":"Assembly (NASM 2.14.02)"},{"id":46,"name":"Bash (5.0.0)"},{"id":47,"name":"Basic (FBC 1.07.1)"},{"id":48,"name":"C (GCC 7.4.0)"},{"id":52,"name":"C++ (GCC 7.4.0)"},{"id":49,"name":"C (GCC 8.3.0)"},{"id":53,"name":"C++ (GCC 8.3.0)"},{"id":50,"name":"C (GCC 9.2.0)"},{"id":54,"name":"C++ (GCC 9.2.0)"},{"id":51,"name":"C# (Mono 6.6.0.161)"},{"id":55,"name":"Common Lisp (SBCL 2.0.0)"},{"id":56,"name":"D (DMD 2.089.1)"},{"id":57,"name":"Elixir (1.9.4)"},{"id":58,"name":"Erlang (OTP 22.2)"},{"id":44,"name":"Executable"},{"id":59,"name":"Fortran (GFortran 9.2.0)"},{"id":60,"name":"Go (1.13.5)"},{"id":61,"name":"Haskell (GHC 8.8.1)"},{"id":62,"name":"Java (OpenJDK 13.0.1)"},{"id":63,"name":"JavaScript (Node.js 12.14.0)"},{"id":64,"name":"Lua (5.3.5)"},{"id":65,"name":"OCaml (4.09.0)"},{"id":66,"name":"Octave (5.1.0)"},{"id":67,"name":"Pascal (FPC 3.0.4)"},{"id":68,"name":"PHP (7.4.1)"},{"id":43,"name":"Plain Text"},{"id":69,"name":"Prolog (GNU Prolog 1.4.5)"},{"id":70,"name":"Python (2.7.17)"},{"id":71,"name":"Python (3.8.1)"},{"id":72,"name":"Ruby (2.7.0)"},{"id":73,"name":"Rust (1.40.0)"},{"id":74,"name":"TypeScript (3.7.4)"}]'
         );
     }
 
