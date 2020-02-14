@@ -90,7 +90,9 @@ class BookController extends Controller
     public function getQrCode(Book $book)
     {
         $qrCode = new QrCode();
-        $qrCode->setText($this->generateUrl('edubox_book_show', ['id' => $book->getId()], Router::ABSOLUTE_URL));
+        $qrCode->setText('http://portal.edubox.pw'.
+            $this->generateUrl('edubox_book_show', ['id' => $book->getId()])
+        );
         $response = new Response($qrCode->writeString());
         $response->headers->set('Content-Type', $qrCode->getContentType());
         return $response;
