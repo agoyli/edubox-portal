@@ -13,7 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Router;
 
 class BookController extends Controller
 {
@@ -106,11 +105,14 @@ class BookController extends Controller
 
     /**
      * @param Book $book
+     * @return Response
      * @Route(path="/book/{id}/read", name="edubox_dook_read")
      */
     public function readAction(Book $book)
     {
-
+        return $this->render('@EduBox/Front/book/read.html.twig', [
+            'book' => $book,
+        ]);
     }
 
 

@@ -26,7 +26,7 @@ class ResourceController extends Controller
             'resources' => $paginator->paginate(
                 $resourceManager->getResourcesBy($request),
                 $request->query->getInt('page', 1),
-                1
+                12
             ),
             'categories' =>  $resourceManager->getCategories(),
             'tags' =>  $resourceManager->getTags(),

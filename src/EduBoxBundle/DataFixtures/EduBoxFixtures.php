@@ -265,6 +265,7 @@ class EduBoxFixtures extends Fixture
             ],
             "user" => [
                 "password" => "user",
+                "roles" => [],
             ],
         ];
         foreach ($users as $key => $item) {
@@ -284,7 +285,6 @@ class EduBoxFixtures extends Fixture
             "1" => ["fullname" => "Gurbannazar Ezizow"],
             "3" => ["fullname" => "Nurmyrat Saryhanow"],
             "4" => ["fullname" => "Kerim Gurbannepesow"],
-            "7" => ["fullname" => "Hydyr Derýaýew"],
             "8" => ["fullname" => "Gurbanaly Magrupy"],
         ];
         foreach ($authors as $key => $item) {
@@ -298,22 +298,21 @@ class EduBoxFixtures extends Fixture
 
         // Create books
         $books = [
-            ["name" => "Saýlanan eserler", "year" => "1995", "pages" => "262", "author" => "1", "bookfile" => "media/pdf/1.pdf", "bookImage" => "media/image/book/1.png"],
-            ["name" => "Şükür bagşy", "year" => "1961", "pages" => "53", "author" => "3", "bookfile" => "media/pdf/3.pdf", "bookImage" => "media/image/book/3.png"],
-            ["name" => "Oýlanma baýry", "year" => "1995", "pages" => "437", "author" => "4", "bookfile" => "media/pdf/4.pdf", "bookImage" => "media/image/book/4.png"],
-            ["name" => "Ykbal birinji tom", "year" => "", "pages" => "325", "author" => "7", "bookfile" => "media/pdf/7.pdf", "bookImage" => "media/image/book/7.png"],
-            ["name" => "Magrupy", "year" => "1991", "pages" => "48", "author" => "8", "bookfile" => "media/pdf/8.pdf", "bookImage" => "media/image/book/8.png"],
+            ["name" => "Saýlanan eserler", "year" => "1995", "pages" => "262", "author" => "1", "bookfile" => "uploads/pdf/1.pdf", "bookImage" => "uploads/image/book/1.png"],
+            ["name" => "Şükür bagşy", "year" => "1961", "pages" => "53", "author" => "3", "bookfile" => "uploads/pdf/3.pdf", "bookImage" => "uploads/image/book/3.png"],
+            ["name" => "Oýlanma baýry", "year" => "1995", "pages" => "437", "author" => "4", "bookfile" => "uploads/pdf/4.pdf", "bookImage" => "uploads/image/book/4.png"],
+            ["name" => "Magrupy", "year" => "1991", "pages" => "48", "author" => "8", "bookfile" => "uploads/pdf/8.pdf", "bookImage" => "uploads/image/book/8.png"],
         ];
         foreach ($books as $item)
         {
             $bookFile = new Media();
-            $bookFile->setBinaryContent('/var/www/edx.pw.loc/web/uploads/'.$item['bookfile']);
+            $bookFile->setBinaryContent('/var/www/edx.pw.loc/web/'.$item['bookfile']);
             $bookFile->setContext('book');
             $bookFile->setCategory($contexts['book']['context']->category);
             $bookFile->setProviderName('sonata.media.provider.file');
 
             $bookImage = new Media();
-            $bookImage->setBinaryContent('/var/www/edx.pw.loc/web/uploads/'.$item['bookImage']);
+            $bookImage->setBinaryContent('/var/www/edx.pw.loc/web/'.$item['bookImage']);
             $bookImage->setContext('book');
             $bookImage->setCategory($contexts['book']['context']->category);
             $bookImage->setProviderName('sonata.media.provider.image');
