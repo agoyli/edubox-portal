@@ -36,7 +36,7 @@ class SubmissionManager
 
     public function getHost()
     {
-        return 'https://api.judge0.com';
+        return 'http://s3.tmy.su:3000';
     }
 
     public function getLanguages()

@@ -50,6 +50,8 @@ $(document).ready(function () {
         $(this).hide();
         $("#code_submit_submit").attr('disabled', false);
     });
+
+    $('.select2').select2()
 });
 
 function updateSubmission() {

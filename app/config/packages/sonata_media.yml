@@ -7,6 +7,9 @@ sonata_media:
   db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr it is mandatory to choose one here
   default_context: default # you need to set a context
   contexts:
+    author:
+      providers:
+        - sonata.media.provider.image
     book:
       providers:
         - sonata.media.provider.file

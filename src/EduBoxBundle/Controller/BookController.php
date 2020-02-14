@@ -8,8 +8,6 @@ use Application\Sonata\MediaBundle\Entity\Media;
 use EduBoxBundle\Entity\Author;
 use EduBoxBundle\Entity\Book;
 use Endroid\QrCode\QrCode;
-use FOS\RestBundle\Controller\Annotations as Rest;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,40 +22,12 @@ class BookController extends Controller
      */
     public function listAction(Request $request)
     {
-        $books = $this->getDoctrine()->getRepository('EduBoxBundle:Book')->createQueryBuilder('b');
-
-        $categoryId = (int)$request->get('category');
-        $authorId = (int)$request->get('author');
-        $search = $request->get('search');
-
-        if ($categoryId > 0) {
-            $books->leftJoin('b.categories', 'c')
-                ->where('c.id = :categoryId')->setParameter('categoryId', $categoryId);
-        }
-
-        if ($authorId > 0) {
-            $books->leftJoin('b.authors', 'a')
-                ->where('a.id = :authorId')->setParameter('authorId', $authorId);
-        }
-
-        if (strlen($search) > 0) {
-            $books
-                ->andWhere(
-                    $books->expr()->like('CONCAT(lower(b.name),lower(b.description))', $books->expr()->literal('%'.$search.'%'))
-                );
-        } else {
-            $search = null;
-        }
-
-        $categories = $this->getDoctrine()->getRepository('ApplicationSonataClassificationBundle:Category')->findBy(['context' => 'book']);
-        $authors = $this->getDoctrine()->getRepository('EduBoxBundle:Author')->findAll();
+        $bookManager = $this->get('edubox_book_manager');
         return $this->render('@EduBox/Front/book/list.html.twig', [
-            'books' => $books->getQuery()->getResult(),
-            'categories' =>  $categories,
-            'authors' => $authors,
-            'categoryId' => $categoryId,
-            'authorId' => $authorId,
-            'search' => $search,
+            'books' => $bookManager->getBooksBy($request),
+            'categories' =>  $bookManager->getCategories(),
+            'tags' =>  $bookManager->getTags(),
+            'authors' => $bookManager->getAuthors(),
         ]);
     }
 

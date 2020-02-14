@@ -7,6 +7,7 @@ namespace EduBoxBundle\Admin;
 use Application\Sonata\ClassificationBundle\Entity\Category;
 use Application\Sonata\ClassificationBundle\Entity\Tag;
 use Doctrine\ORM\EntityRepository;
+use EduBoxBundle\Entity\Resource;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -27,7 +28,7 @@ class ResourceAdmin extends AbstractAdmin
             'class' => Category::class,
             'query_builder' => function(EntityRepository $manager) {
                 $qb = $manager->createQueryBuilder('q');
-                $qb->where('q.context = :context')->setParameter('context', 'resource');
+                $qb->where('q.context = :context')->setParameter('context', Resource::$context);
                 return $qb;
             }
         ]);
@@ -36,7 +37,7 @@ class ResourceAdmin extends AbstractAdmin
             'class' => Tag::class,
             'query_builder' => function(EntityRepository $manager) {
                 $qb = $manager->createQueryBuilder('q');
-                $qb->where('q.context = :context')->setParameter('context', 'resource');
+                $qb->where('q.context = :context')->setParameter('context', Resource::$context);
                 return $qb;
             }
         ]);
@@ -47,6 +48,6 @@ class ResourceAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $list)
     {
-        $list->add('name');
+        $list->addIdentifier('name');
     }
 }

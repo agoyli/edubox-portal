@@ -44,38 +44,71 @@
                                 {{ book.name }}
                             </a>
                         </li>
-                        <li class="list-group-item">
-                            <b>Awtor</b>
-                            <a class="pull-right">
-                                {% for author in book.authors %}
-                                    {{ author.fullName }}{% if not loop.last %}, {% endif %}
-                                {% endfor %}
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Sahypa sany</b>
-                            <a class="pull-right">
-                                {{ book.pageCount }}
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Ýyl</b>
-                            <a class="pull-right">
-                                {{ book.year }}
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Annotasiýa</b>
-                            <p>
-                                {{ book.description }}
-                            </p>
-                        </li>
-                        <li class="list-group-item">
+                        {% if book.authors|length > 0 %}
+                            <li class="list-group-item">
+                                <b>Awtor</b>
+                                <a class="pull-right">
+                                    {% for author in book.authors %}
+                                        {{ author.fullName }}{% if not loop.last %}, {% endif %}
+                                    {% endfor %}
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if book.pageCount %}
+                            <li class="list-group-item">
+                                <b>Sahypa sany</b>
+                                <a class="pull-right">
+                                    {{ book.pageCount }}
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if book.year %}
+                            <li class="list-group-item">
+                                <b>Ýyl</b>
+                                <a class="pull-right">
+                                    {{ book.year }}
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if book.categories|length > 0 %}
+                            <li class="list-group-item">
+                                <b>Kategoriýalar:</b>
+                                <p>
+                                    {% for category in book.categories %}
+                                        {{ category.name }}
+                                        {% if not loop.last %}, {% endif %}
+                                    {% else %}
+                                        -
+                                    {% endfor %}
+                                </p>
+                            </li>
+                        {% endif %}
+                        {% if book.tags|length > 0 %}
+                            <li class="list-group-item">
+                                <b>Tegler</b>
+                                <p>
+                                    {% for tag in book.tags %}
+                                        {{ tag.name }}
+                                        {% if not loop.last %}, {% endif %}
+                                    {% else %}
+                                        -
+                                    {% endfor %}
+                                </p>
+                            </li>
+                        {% endif %}
+                        {% if book.description %}
+                            <li class="list-group-item">
+                                <p>
+                                    {{ book.description }}
+                                </p>
+                            </li>
+                        {% endif %}
+                        {#<li class="list-group-item">
                             <b>QR code</b>
                             <p>
                                 <img src="{{ path('edubox_book_qrcode', {'id': book.id}) }}" alt="">
                             </p>
-                        </li>
+                        </li>#}
                     </ul>
                 </div>
             </div>

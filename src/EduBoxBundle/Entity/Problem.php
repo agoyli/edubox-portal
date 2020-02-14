@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Problem
 {
+    public static $context = 'problem';
     const TIME_LIMIT = 5, MEMORY_LIMIT = 256;
 
     /**

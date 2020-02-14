@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Resource
 {
+    public static $context = 'resource';
     /**
      * @var int
      *
@@ -65,6 +66,22 @@ class Resource
      * )
      */
     private $tags;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="EduBoxBundle\Entity\Author", inversedBy="resources", cascade={"persist"})
+     * @ORM\JoinTable(
+     *     name="resource_author",
+     *     joinColumns={
+     *          @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *          @ORM\JoinColumn(name="resource_id", referencedColumnName="id")
+     *     }
+     * )
+     */
+    private $authors;
 
 
     /**
@@ -171,6 +188,30 @@ class Resource
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Set author
+     *
+     * @param ArrayCollection $authors
+     *
+     * @return Resource
+     */
+    public function setAuthors($authors)
+    {
+        $this->authors = $authors;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return ArrayCollection
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
     }
 }
 

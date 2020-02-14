@@ -2,7 +2,6 @@
 
 namespace EduBoxBundle\Entity;
 
-use Application\Sonata\ClassificationBundle\Entity\Category;
 use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Book
 {
+    public static $context = 'book';
     /**
      * @var int
      *
@@ -145,6 +145,21 @@ class Book
      * )
      */
     private $categories;
+
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\ClassificationBundle\Entity\Tag")
+     * @ORM\JoinTable(
+     *     name="book_tag",
+     *     joinColumns={
+     *          @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *          @ORM\JoinColumn(name="book_id", referencedColumnName="id")
+     *     }
+     * )
+     */
+    private $tags;
 
     public function __construct()
     {
@@ -451,6 +466,33 @@ class Book
         return $this->categories;
     }
 
+    /**
+     * Set tags
+     *
+     * @param ArrayCollection $tags
+     *
+     * @return Book
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Get tags
+     *
+     * @return ArrayCollection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
         if ($this->name != '') return $this->name;

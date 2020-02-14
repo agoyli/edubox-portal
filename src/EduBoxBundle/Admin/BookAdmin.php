@@ -5,6 +5,7 @@ namespace EduBoxBundle\Admin;
 
 
 use Application\Sonata\ClassificationBundle\Entity\Category;
+use Application\Sonata\ClassificationBundle\Entity\Tag;
 use Doctrine\ORM\EntityRepository;
 use EduBoxBundle\Entity\Author;
 use EduBoxBundle\Entity\Book;
@@ -35,13 +36,18 @@ class BookAdmin extends AbstractAdmin
                 'class' => Category::class,
                 'query_builder' => function(EntityRepository $manager) {
                     $qb = $manager->createQueryBuilder('q');
-                    $qb->where('q.context = :context')->setParameter('context', 'book');
-                return $qb;
+                    $qb->where('q.context = :context')->setParameter('context', Book::$context);
+                    return $qb;
                 }
-            ], [
-                'link_parameters' => [
-                    'context' => 'book',
-                ],
+            ])
+            ->add('tags', EntityType::class, [
+                'multiple' => true,
+                'class' => Tag::class,
+                'query_builder' => function(EntityRepository $manager) {
+                    $qb = $manager->createQueryBuilder('q');
+                    $qb->where('q.context = :context')->setParameter('context', Book::$context);
+                    return $qb;
+                }
             ])
             ->add('authors', EntityType::class, [
                 'class' => Author::class,
@@ -55,13 +61,13 @@ class BookAdmin extends AbstractAdmin
             ])
             ->add('bookFile', 'sonata_type_model_list', [], [
                 'link_parameters' => [
-                    'context' => 'book',
+                    'context' => Book::$context,
                     'filter[contentType][value]' => 'pdf',
                 ]
             ])
             ->add('bookImage', 'sonata_type_model_list', [], [
                 'link_parameters' => [
-                    'context' => 'book',
+                    'context' => Book::$context,
                     'filter[contentType][value]' => 'image',
                 ]
             ])

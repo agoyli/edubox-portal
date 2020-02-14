@@ -5,8 +5,9 @@ services:
     tags:
       - name: sonata.admin
         manager_type: orm
-        label: 'Resources'
-        group: 'Resources'
+        label: 'Maglumatlar'
+        group: 'Maglumatlar'
+        icon: '<i class="fa fa-bookmark"></i>'
         on_top: true
 
   edubox_admin_book:
@@ -15,8 +16,9 @@ services:
     tags:
       - name: sonata.admin
         manager_type: orm
-        label: 'Books'
-        group: 'Books'
+        label: 'Kitaplar'
+        group: 'Kitaplar'
+        icon: '<i class="fa fa-book"></i>'
         on_top: true
 
   edubox_admin_author:
@@ -25,8 +27,11 @@ services:
     tags:
       - name: sonata.admin
         manager_type: orm
-        label: 'Authors'
-        group: 'Authors'
+        label_translator_strategy: sonata.admin.label.strategy.form_component
+        label_catalogue: 'EduBoxBundle'
+        label: 'Awtorlar'
+        group: 'Awtorlar'
+        icon: '<i class="fa fa-users"></i>'
         on_top: true
 
   edubox_admin_problem:
@@ -35,8 +40,9 @@ services:
     tags:
       - name: sonata.admin
         manager_type: orm
-        label: 'Problems'
-        group: 'Problems'
+        label: 'Meseleler'
+        group: 'Meseleler'
+        icon: '<i class="fa fa-cube"></i>'
         on_top: true
 
   edubox_admin_problem_test:
@@ -54,6 +60,18 @@ services:
   edubox_book_manager:
     class: EduBoxBundle\DomainManager\BookManager
     arguments: ['@doctrine.orm.entity_manager', '@kernel', '@router']
+
+  edubox_author_manager:
+    class: EduBoxBundle\DomainManager\AuthorManager
+    arguments: ['@doctrine.orm.entity_manager']
+
+  edubox_resource_manager:
+    class: EduBoxBundle\DomainManager\ResourceManager
+    arguments: ['@doctrine.orm.entity_manager']
+
+  edubox_problem_manager:
+    class: EduBoxBundle\DomainManager\ProblemManager
+    arguments: ['@doctrine.orm.entity_manager']
 
   edubox_code_submit_handler:
     class: EduBoxBundle\Form\CodeSubmitHandler

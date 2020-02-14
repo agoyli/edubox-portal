@@ -2,7 +2,12 @@
 
 
 {% block linkElement %}
-    <a href="{{ item.uri }}" {% if item.hasChildren %}class="dropdown-toggle" data-toggle="dropdown"{% endif %}>{{ item.label|raw }}</a>
+    <a href="{{ item.uri }}" {% if item.hasChildren %}class="dropdown-toggle" data-toggle="dropdown"{% endif %}>
+        {% if item.attribute('icon') is defined %}
+            {{ item.attribute('icon')|raw }}
+        {% endif %}
+        {{ item.label|raw }}
+    </a>
 {% endblock %}
 
 {% block item %}

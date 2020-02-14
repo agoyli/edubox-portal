@@ -7,6 +7,7 @@ namespace EduBoxBundle\Admin;
 use Application\Sonata\ClassificationBundle\Entity\Category;
 use Application\Sonata\ClassificationBundle\Entity\Tag;
 use Doctrine\ORM\EntityRepository;
+use EduBoxBundle\Entity\Problem;
 use EduBoxBundle\Form\Type\ExamplesJsonType;
 use FOS\CKEditorBundle\DependencyInjection\Configuration;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
@@ -37,7 +38,7 @@ class ProblemAdmin extends AbstractAdmin
                 'class' => Category::class,
                 'query_builder' => function(EntityRepository $manager) {
                     $qb = $manager->createQueryBuilder('q');
-                    $qb->where('q.context = :context')->setParameter('context', 'problem');
+                    $qb->where('q.context = :context')->setParameter('context', Problem::$context);
                     return $qb;
                 }
             ])
@@ -46,7 +47,7 @@ class ProblemAdmin extends AbstractAdmin
                 'class' => Tag::class,
                 'query_builder' => function(EntityRepository $manager) {
                     $qb = $manager->createQueryBuilder('q');
-                    $qb->where('q.context = :context')->setParameter('context', 'problem');
+                    $qb->where('q.context = :context')->setParameter('context', Problem::$context);
                     return $qb;
                 }
             ])

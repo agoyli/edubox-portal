@@ -19,41 +19,11 @@ class ProblemController extends Controller
      */
     public function listAction(Request $request)
     {
-        $problems = $this->getDoctrine()->getRepository('EduBoxBundle:Problem')->createQueryBuilder('p');
-
-        $categoryId = (int)$request->get('category');
-        $tagId = (int)$request->get('tag');
-        $search = $request->get('search');
-
-        if ($categoryId > 0) {
-            $problems->leftJoin('p.categories', 'c')
-                ->where('c.id = :categoryId')->setParameter('categoryId', $categoryId);
-        }
-
-        if ($tagId > 0) {
-            $problems->leftJoin('p.tags', 't')
-                ->where('t.id = :tagId')->setParameter('tagId', $tagId);
-        }
-
-        if (strlen($search) > 0) {
-            $problems
-                ->andWhere(
-                    $problems->expr()->like('CONCAT(lower(p.name),lower(p.description))', $problems->expr()->literal('%'.$search.'%'))
-                );
-        } else {
-            $search = null;
-        }
-
-        $categories = $this->getDoctrine()->getRepository('ApplicationSonataClassificationBundle:Category')->findBy(['context' => 'problem']);
-        $tags = $this->getDoctrine()->getRepository('ApplicationSonataClassificationBundle:Tag')->findBy(['context' => 'problem']);
-        $problems = $problems->getQuery()->getResult();
+        $problemManager = $this->get('edubox_problem_manager');
         return $this->render('@EduBox/Front/problem/list.html.twig', [
-            'problems' => $problems,
-            'categories' =>  $categories,
-            'tags' =>  $tags,
-            'categoryId' => $categoryId,
-            'tagId' => $tagId,
-            'search' => $search,
+            'problems' => $problemManager->getProblemsBy($request),
+            'categories' =>  $problemManager->getCategories(),
+            'tags' =>  $problemManager->getTags(),
         ]);
 
     }

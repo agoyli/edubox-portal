@@ -1,6 +1,9 @@
 {% extends '@EduBox/front_layout.html.twig' %}
 
 {% set title = 'Meseleler' %}
+{% set categoryId = app.request.get('category') %}
+{% set tagIds = app.request.get('tags') %}
+{% set search = app.request.get('search') %}
 
 {% block front_title %}{{  parent() }} / {{ title }}{% endblock %}
 
@@ -57,14 +60,19 @@
                         </div>
                         <div class="form-group">
                             <label for="">Tegler</label>
-                            <select class="form-control" name="tag" onchange="this.form.submit()">
-                                <option value="0">Ählisi</option>
+                            <select
+                                    class="select2"
+                                    name="tags[]"
+                                    multiple="multiple"
+                                    data-placeholder="Ählisi"
+                                    onchange="this.form.submit()"
+                                    style="width: 100%;"
+                            >
                                 {% for tag in tags %}
-                                    <option value="{{ tag.id }}" {% if tagId == tag.id %}selected{% endif %} >{{ tag.name }}</option>
+                                    <option value="{{ tag.id }}" {% if tag.id in tagIds %}selected{% endif %}>{{ tag.name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
-
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Süz</button>
                             <a href="{{ path(app.request.attributes.get('_route')) }}" class="btn btn-warning">Täzele</a>
