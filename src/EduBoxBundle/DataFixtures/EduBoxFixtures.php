@@ -17,9 +17,17 @@ use EduBoxBundle\Entity\Problem;
 use EduBoxBundle\Entity\ProblemTest;
 use EduBoxBundle\Entity\Resource;
 use EduBoxBundle\Entity\User;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\HttpKernel\Kernel;
 
 class EduBoxFixtures extends Fixture
 {
+    use ContainerAwareTrait;
+    public $kernelRootDir;
+
+
+
+
     public function load(ObjectManager $manager)
     {
 
@@ -306,13 +314,13 @@ class EduBoxFixtures extends Fixture
         foreach ($books as $item)
         {
             $bookFile = new Media();
-            $bookFile->setBinaryContent('/var/www/edx.pw.loc/web/'.$item['bookfile']);
+            $bookFile->setBinaryContent(realpath($this->kernelRootDir).'/web/'.$item['bookfile']);
             $bookFile->setContext('book');
             $bookFile->setCategory($contexts['book']['context']->category);
             $bookFile->setProviderName('sonata.media.provider.file');
 
             $bookImage = new Media();
-            $bookImage->setBinaryContent('/var/www/edx.pw.loc/web/'.$item['bookImage']);
+            $bookImage->setBinaryContent(realpath($this->kernelRootDir).'/web/'.$item['bookImage']);
             $bookImage->setContext('book');
             $bookImage->setCategory($contexts['book']['context']->category);
             $bookImage->setProviderName('sonata.media.provider.image');

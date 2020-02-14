@@ -1,4 +1,8 @@
 services:
+  edubox_fixtures:
+    class: EduBoxBundle\DataFixtures\EduBoxFixtures
+    $kernelRootDir:  '%kernel.root_dir%'
+
   edubox_admin_resource:
     class: EduBoxBundle\Admin\ResourceAdmin
     arguments: [~, EduBoxBundle\Entity\Resource, ~]
