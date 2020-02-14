@@ -110,9 +110,10 @@ class BookController extends Controller
      */
     public function readAction(Book $book)
     {
-        return $this->render('@EduBox/Front/book/read.html.twig', [
-            'book' => $book,
-        ]);
+        return $this->redirect(
+            '/assets/libs/pdfjs/web/viewer.html?file='.
+            $this->generateUrl('edubox_book_download', ['id' => $book->getId()])
+        );
     }
 
 
