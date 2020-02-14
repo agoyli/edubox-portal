@@ -16,7 +16,7 @@
                     {% if book.bookImage.size is defined %}
                         <img src="{% path book.bookImage, 'reference' %}" alt="" width="100%">
                     {% else %}
-                        <img src="{{ asset('uploads/media/book.jpg') }}" alt="" width="100%">
+                        <img src="{{ asset('uploads/image/book.jpg') }}" alt="" width="100%">
                     {% endif %}
                 </div>
                 {% if book.bookFile.size is defined %}

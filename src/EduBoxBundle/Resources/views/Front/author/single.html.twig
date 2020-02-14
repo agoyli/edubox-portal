@@ -2,7 +2,7 @@
     <a href="{{ path('edubox_author_show', {'id': author.id}) }}">
         <div class="box box-primary box-solid">
             <!-- /.box-header -->
-            <div class="box-body no-padding book-image" style="background-image: url({% if author.image.size is defined %}{% path author.image, 'reference' %}{% else %}{{ asset('uploads/media/author.jpg') }}{% endif %});">
+            <div class="box-body no-padding book-image" style="background-image: url({% if author.image.size is defined %}{% path author.image, 'reference' %}{% else %}{{ asset('uploads/image/author.jpg') }}{% endif %});">
             </div>
             <!-- /.box-body -->
             <div class="box-header">

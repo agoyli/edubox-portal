@@ -5,7 +5,7 @@
 {% block front_title %}{{  parent() }} / {{ title }}{% endblock %}
 
 {% block front_content %}
-    <div id="carousel-homepage-generic" class="carousel slide" data-ride="carousel">
+    <div id="carousel-homepage-generic" class="carousel slide" data-ride="carousel" data-interval="3000">
         <ol class="carousel-indicators">
             <li data-target="#carousel-homepage-generic" data-slide-to="0" class="active"></li>
             <li data-target="#carousel-homepage-generic" data-slide-to="1" class=""></li>
@@ -13,13 +13,19 @@
         </ol>
         <div class="carousel-inner">
             <div class="item active">
-                <img src="{{ asset('uploads/media/image/slider/library.jpg') }}" alt="Akylly kitaphana">
+                <a href="{{ path('edubox_book_list') }}">
+                    <img src="{{ asset('uploads/image/slider/library.jpg') }}" alt="Akylly kitaphana">
+                </a>
             </div>
             <div class="item">
-                <img src="{{ asset('uploads/media/image/slider/problems.jpg') }}" alt="Informatikadan meseleler">
+                <a href="{{ path('edubox_problem_list') }}">
+                    <img src="{{ asset('uploads/image/slider/problems.jpg') }}" alt="Informatikadan meseleler">
+                </a>
             </div>
             <div class="item">
-                <img src="{{ asset('uploads/media/image/slider/resources.jpg') }}" alt="Maglumatlar">
+                <a href="{{ path('edubox_resource_list') }}">
+                    <img src="{{ asset('uploads/image/slider/resources.jpg') }}" alt="Maglumatlar">
+                </a>
             </div>
         </div>
         <a class="left carousel-control" href="#carousel-homepage-generic" data-slide="prev">

@@ -263,6 +263,9 @@ class EduBoxFixtures extends Fixture
                 "password" => "admin",
                 "roles" => ["ROLE_SUPER_ADMIN"],
             ],
+            "user" => [
+                "password" => "user",
+            ],
         ];
         foreach ($users as $key => $item) {
             $user = new User();
@@ -279,14 +282,10 @@ class EduBoxFixtures extends Fixture
         // Create authors
         $authors = [
             "1" => ["fullname" => "Gurbannazar Ezizow"],
-            "2" => ["fullname" => "Çary Aşyrow"],
             "3" => ["fullname" => "Nurmyrat Saryhanow"],
             "4" => ["fullname" => "Kerim Gurbannepesow"],
-            "5" => ["fullname" => "Baýmuhammet Garryýew"],
-            "6" => ["fullname" => "Mämmet Seýidow"],
             "7" => ["fullname" => "Hydyr Derýaýew"],
             "8" => ["fullname" => "Gurbanaly Magrupy"],
-            "9" => ["fullname" => "Ata Gowşudow"],
         ];
         foreach ($authors as $key => $item) {
             $author = new Author();
@@ -300,14 +299,10 @@ class EduBoxFixtures extends Fixture
         // Create books
         $books = [
             ["name" => "Saýlanan eserler", "year" => "1995", "pages" => "262", "author" => "1", "bookfile" => "media/pdf/1.pdf", "bookImage" => "media/image/book/1.png"],
-            ["name" => "Göreş", "year" => "1986", "pages" => "220", "author" => "2", "bookfile" => "media/pdf/2.pdf", "bookImage" => "media/image/book/2.png"],
             ["name" => "Şükür bagşy", "year" => "1961", "pages" => "53", "author" => "3", "bookfile" => "media/pdf/3.pdf", "bookImage" => "media/image/book/3.png"],
             ["name" => "Oýlanma baýry", "year" => "1995", "pages" => "437", "author" => "4", "bookfile" => "media/pdf/4.pdf", "bookImage" => "media/image/book/4.png"],
-            ["name" => "Magtymguly", "year" => "1959", "pages" => "204", "author" => "5", "bookfile" => "media/pdf/5.pdf", "bookImage" => "media/image/book/5.png"],
-            ["name" => "Kesearkaç", "year" => "", "pages" => "539", "author" => "6", "bookfile" => "media/pdf/6.pdf", "bookImage" => "media/image/book/6.png"],
             ["name" => "Ykbal birinji tom", "year" => "", "pages" => "325", "author" => "7", "bookfile" => "media/pdf/7.pdf", "bookImage" => "media/image/book/7.png"],
             ["name" => "Magrupy", "year" => "1991", "pages" => "48", "author" => "8", "bookfile" => "media/pdf/8.pdf", "bookImage" => "media/image/book/8.png"],
-            ["name" => "Perman", "year" => "1989", "pages" => "993", "author" => "9", "bookfile" => "media/pdf/9.pdf", "bookImage" => "media/image/book/9.png"],
         ];
         foreach ($books as $item)
         {
@@ -366,6 +361,17 @@ class EduBoxFixtures extends Fixture
 <p style="text-align: justify;"><strong>Printer</strong> – tekst we grafiki informasiýalary kagyza çykarýan enjamdyr. Printerleriň matrisaly, akymly we lazer görnüşleri bardyr.<strong>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></p>
 <p style="text-align: justify;"><strong>Çeşme:</strong>&nbsp;Türkmenistanyň Bilim ministrligi tarapyndan taýýarlanan, 6-njy synplar üçin “Informatika we informasiýa tehnologiýalary” dersi boýunça okuw kitaby</p>'
             ],
+            [
+                "name" => "Gadymy rimlileriň medeniýeti",
+                "content" => '<p style="text-align: justify;"><strong>Etrusklaryň medeniýeti. </strong>Apennin ýarym adasynyň bir bölegi bolan Etruriýada (häzirki Toskana) m.öňki I müňýyllykda gadymy etrusk taýpalary ösen siwilizasiýany döredipdirler. Ol barada grek we rim awtorlarynyň (Gerodot, Diodor, Strabon, Tit Liwiý, Uly Pliniý) ýazgylary we etrusk mazarlaryndan hem-de gonalgalaryndan tapylan arheologik tapyndylar köp maglumatlary berýär. Miladydan öňki IV asyra degişli Tarkwinidäki etrusk gonamçylygyndan tapylan freskalardaky sazandalaryň suratlary, şol ýerde ýüze çykarylan m. öňki V asyra degişli şekiller şol döwrüň özboluşly medeniýetini hem-de sungatyny açyp görkezýär. Gazuw-agtaryşlaryň netijesinde 10 müňe golaý etrusk ýazgylary tapylypdyr. Emma şeýle-de bolsa, etrusklaryň gelip çykyşy we olaryň döreden baý medeniýeti bilen baglanyşykly çözülmän ýatan meseleler bardyr. Etruriýada bürünç we demir magdanlary gazylyp alnypdyr. Etrusklar rim jemgyýetiniň mifologiýasyna we dinine öz täsirini ýetiripdir. Italiýanyň taýpalary Orta we Demirgazyk Italiýa Etruriýanyň üsti arkaly grek hatyny Kabul edipdirler. Ybadathanalaryň, köşkleriň, köprüleriň, kanallaryň we gala diwarlarynyň galyndylarynyň saklanyp galmagy şol döwürde medeniýetiň ösendigine şaýatlyk edýär. Etruriýada bürünçden ýasalan heýkeller we reňklenen terrakotalar (gyzylymtyl-goňur reňkli bişirilen toýundan edilen heýkeljikler), sebetler, tabytlar, metaldan, altyndan edilen önümler ýasalypdyr.</p>
+<p style="text-align: justify;"><strong>Gadymy Rim medeniýetiniň kemala gelmeginde etrusklaryň, grekleriň we basylyp alnan ýurtlaryň ilatynyň täsiri. </strong>Rimde ylmyň hem-de medeniýetiň ösüşine etrusklaryň we grekleriň bu ugurda gazananlary uly täsir edipdir. Aýratyn hem bu täsir binagärlikde güýçli duýlupdyr. Rimliler hem öz gezeginde etrusk medeniýetiniň ösüşine täsir edipdirler. Kitaphanalar, ybadathanalar, teatrlar, köşkler we gaýry desgalar grek däbine laýyklykda bina edilipdir. Miladydan öňki IV asyrda Etruriýadan köp etrusk ilaty göçüp gelip, Rimde mesgen tutupdyr. Şunuň netijesinde etrusklaryň ýaşaýan ýerinde şäheriň aýratyn bir bölegi emele gelipdir. Külalçylyk we zergärçilik sungatynda rim medeniýetine italiýalylar hem öz täsirini ýetiripdirler. Rimiň irki sungatynda italiýalylaryň, etrusklaryň, grekleriň täsiri giňden ýaýbaňlanypdyr. Eneýa, Romul we Rem hakyndaky rowaýatlar rimlilere Etruriýanyň üsti arkaly gelip ýetipdir. Grek-makedon ilaty hem her bir şäheriň medeni durmuşyna täsiredipdir.</p>
+<p style="text-align: justify;"><strong>Nusgawy rim binagärligi. </strong>Miladynyň 75–80-nji ýyllarynda Gadymy Rimde tomaşa jaýy bolan Kolizeý ýa-da «Flawileriň amfiteatry» diýip at alan ajaýyp bina gurlupdyr. Oňa bir wagtda 50 müň tomaşaçy ýerleşip bilýär eken. Kolizeý ýyrtyjy haýwanlary uruşdyrmak, gladiatorlaryň söweşini geçirmek, at çapyşyklary we beýleki oýunlary guramak üçin niýetlenilipdir. Kolizeýiň gurluşygynda rim binagärliginiň esasy gurluşyk serişdeleri bolan tuf we trawert daşlary, onuň galereýalarynyň gurluşygynda bolsa kerpiç bilen mermer ulanylypdyr. Amfiteatrdaky heýkeller saklanmandyr, ýöne onuň diwarlarynyň ýüzi ýarym sütünleri ýatladyp duran pilýastralar we arkalar ýaly gurluşyk ülňüleri bilen baý bezelipdir. Şäheriň möhüm gurluşyk desgalarynyň arasynda Rim forumy aýratyn uly ähmiýete eýe bolupdyr. Rim forumy töweregindäki binalary özünde jemleýän binalar toplumy bolup, ol şäheriň jemgyetçilik-syýasy durmuşynyň jemlenen ýerine öwrülipdir. Bu desga miladydan öňki VI asyrdaasly Damaskdan bolan Apollodor tarapyndan gurlupdyr. Başda forumyň ýerinde şäher bazary bolupdyr, soňra ol halk ýygnaklarynyň geçirilýän ýeri bolan komisini, Senatyň ýygnagy geçýän kuriýany hem özüne birikdiripdir.</p>
+<p style="text-align: justify;">Gadymy Rimde ähli hudaýlaryň heýkelleriniň jemlenen ýeri bolan <strong>Panteon</strong> gurlupdyr. Bu desga miladynyň 125‑nji ýylynda rim serkerdesi hem-de döwlet işgäri Awgustyň egindeşi Mark Wipsaniý Agrippa (m. ö. 63-nji ýyl– miladynyň 12-nji ýyly) tarapyndan bina edilip, onuň gümmezi&nbsp; 43 metre barabar bolupdyr. Gümmez daş garnuwdan (betondan) we kerpiçden gurlup, gurluş taýdan gümmezi saklaýan diwarlardan, içinden iki setir edilip bölünen galereýadan, iç tarapy bolsa ýedi sany tagçalardan ybarat bolupdyr. Rim binagärlik sungatynyň ajaýyp desgalarynyň biri-de Dabaraly derwezelerdir (Triumfal arkalar). Dabaraly derwezelerRim jemgyýetiniň durmuşynda bolup geçýän möhümwakalary dabaralandyrmak hem-de şöhratlandyrmak üçin wagtlaýyn ýa-da hemişelik gurulýan kaşaň desgalar bolupdyr. Dabaraly derwezeleriň gurluşygynda rim binagärliginde ýörgünli bolan dürli binagärlik ülňüleri we bezegler ulanylypdyr. Bu desgalarda oturdylan heýkeller, şekillendirilen relýefler we ýadygärlik ýazgylary görenleri haýran galdyrypdyr. Şeýle desgalaryň hatarynda Titanyň(81-nji ýyl) we Konstantiniň (315-nji ýyl) dabaraly derwezelerini mysal hökmünde görkezmek bolar.</p>
+<p style="text-align: justify;">Tomus günleri Italiýada yssy epgek öwsüpdir. Şonuň üçin hem gadymy döwürlerde daglardan we köllerden ýerasty turba geçirijiler arkaly Rime suw akdyrylypdyr. Şeýle suw geçirijileriniň ilkinjileriniň biri miladydan öňki 504-nji ýylda Appiý Klawdiý Sabina tarapyndan gurlupdyr. Rim şäheriniň Tibr derýasynyň boýunda ýerleşmegi derýanyň üstünden köprüleri gurmagyň zerurlygyny döredipdir. Şonuň üçin Rimde daşdan birnäçe gadymy köprüler gurlupdyr.</p>
+<p style="text-align: justify;">Rimde teatrlaryň ýüze çykmagy gadymy baýramçylyklar, esasan hem, hasyl toýlary bilen baglanyşykly bolupdyr. Teatrlarda gülküli sahnalar, tanslar, aýdym-sazlar ýaňlanypdyr. Miladydan öňki III asyryň ahyrlarynda halk tomaşalarynyň täze bir mimika görnüşi has giň gerim alypdyr. Onda ýüzüň-gözüň hereketi, üm (ýagny mimika)we ses bilen çykyş edilipdir. Gerodyň (miladydan öňki III asyr) eoliý şiwesinde papirusa ýazylan mimleriň giň halk köpçüligine hödürlenen ýazgylary bolupdyr. Teatr üçin hemişelik niýetlenen ýörite ýer bolmandyr. Şonuň üçin ilki-ilkiler ybadathananyň golaýynda oýunlar guralypdyr. Ilkinji daşdan salnan teatr miladydan öňki 55–52-nji ýyllarda Pompeý tarapyndan gurlupdyr. M.öňki I asyryň ahyrlarynda Marselle we Balba atly iki sany teatr gurlupdyr. Miladydan öňki III–II asyrlarda artistler adatça nikapsyz çykyş edipdirler, emma has gijiräk nikap geýip çykyş etmek däbe öwrülipdir. M. öňki I asyrda artistçilik sungaty has ösüpdir, ýöne sahnada zenan keşbini erkekler ýerine ýetiripdirler. Rimde imperatorlar tarapyndan şäher medeniýetiniň möhüm alamatlarynyň biri bolan hammamlar (term) köpçülikleýin gurlupdyr. Olaryň sany müňden hem geçipdir. Hammamlaryň gapdalynda dynç alyş otaglary, kitaphanalar we sport meýdançalary bolup, adamlar olaryň hyzmatlaryndan peýdalanyp bilipdirler. Baýramçylyk günleri adamlar sirklere we amfiteatrlara tomaşa görmek üçin barypdyrlar.</p>
+<p style="text-align: justify;"><strong>Çeşme:</strong><span style="font-style: inherit; font-weight: inherit;">&nbsp;Türkmenistanyň Bilim ministrligi tarapyndan taýýarlanan, 11-njy synplar üçin “Dünýä Medeniýeti” dersi boýunça okuw kitaby</span></p>',
+                "categories" => [],
+            ]
         ];
         foreach ($resources as $item) {
             $resource = new Resource();
@@ -379,7 +385,7 @@ class EduBoxFixtures extends Fixture
         // Create problems
         $problems = [
             [
-                "name" => "Iki sany massiw",
+                "name" => "Setirdäki sanlaryň mukdary",
                 "description" => "Girizilen setirde näçe sany sifriň bardygyny kesgitlemek üçin programma ýazmaly.",
                 "tests" => [
                     [
@@ -399,7 +405,29 @@ class EduBoxFixtures extends Fixture
                         "output" => "1",
                     ],
                 ]
-            ]
+            ],
+            [
+                "name" => "Simwollar bilen gezekleşýän sanlar",
+                "description" => "Sanlaryň we latyn elipbiýiniň harplarynyň yzygiderliginden düzülen tekst berlen. Tekstiň sifrler we harplar gezekleşip gelýän iň uzyn bölegini kesgitlemeli.",
+                "tests" => [
+                    [
+                        "input" => "xya2b3cXyz4",
+                        "output" => "a2b3c",
+                    ],
+                    [
+                        "input" => "a1b22a",
+                        "output" => "a1b2",
+                    ],
+                    [
+                        "input" => "aaaaa1",
+                        "output" => "a1",
+                    ],
+                    [
+                        "input" => "a111a111a",
+                        "output" => "1a1",
+                    ],
+                ]
+            ],
         ];
         foreach ($problems as $item) {
             $problem = new Problem();
