@@ -53,7 +53,7 @@ class ResourceManager
                 );
         }
 
-        return $resources->getQuery()->getResult();
+        return $resources->getQuery();
     }
 
     public function getCategories()

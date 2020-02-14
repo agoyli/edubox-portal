@@ -7,17 +7,30 @@
             {{ item.attribute('icon')|raw }}
         {% endif %}
         {{ item.label|raw }}
+        {% if item.hasChildren %}<span class="caret"></span>{% endif %}
     </a>
+    {% if item.hasChildren %}
+        <ul class="dropdown-menu">
+            {% for childItem in item.children %}
+                <li><a href="{{ childItem.uri }}">{{ childItem.label }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}
 
 {% block item %}
-    <li {% if matcher.isCurrent(item) %}class="active"{% endif %}>
+    <li class="{% if matcher.isCurrent(item) or matcher.isAncestor(item) %}active{% endif %} {% if item.hasChildren%}dropdown{% endif %}">
         {%- if item.uri is not empty %}
             {{ block('linkElement') }}
         {%- endif %}
     </li>
 {% endblock %}
 
+{% block children %}
+    {% for item in item.children %}
+        {{ block('item') }}
+    {% endfor %}
+{% endblock %}
 
 {% block list %}
     {% if item.hasChildren and options.depth is not same as(0) and item.displayChildren %}
@@ -27,3 +40,4 @@
         </ul>
     {% endif %}
 {% endblock %}
+

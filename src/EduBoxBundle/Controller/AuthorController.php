@@ -5,6 +5,7 @@ namespace EduBoxBundle\Controller;
 
 
 use EduBoxBundle\Entity\Author;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,11 +17,15 @@ class AuthorController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route(path="/author/list", name="edubox_author_list")
      */
-    public function listAction(Request $request)
+    public function listAction(Request $request, PaginatorInterface $paginator)
     {
         $authorManager = $this->get('edubox_author_manager');
         return $this->render('@EduBox/Front/author/list.html.twig', [
-            'authors' => $authorManager->getAuthorsBy($request),
+            'authors' => $paginator->paginate(
+                $authorManager->getAuthorsBy($request),
+                $request->query->getInt('page', 1),
+                8
+            ),
             'categories' =>  $authorManager->getCategories(),
         ]);
     }

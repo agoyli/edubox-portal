@@ -67,7 +67,7 @@ class BookManager
                 );
         }
 
-        return $books->getQuery()->getResult();
+        return $books->getQuery();
     }
 
     /**

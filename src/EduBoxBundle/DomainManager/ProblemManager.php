@@ -49,7 +49,7 @@ class ProblemManager
                 );
         }
 
-        return $problems->getQuery()->getResult();
+        return $problems->getQuery();
     }
 
     public function getCategories()

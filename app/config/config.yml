@@ -9,6 +9,7 @@ imports:
     - { resource: 'packages/sonata_classification.yml' }
     - { resource: '@EduBoxBundle/Resources/config/services.yml' }
     - { resource: 'packages/fos_ck_editor.yml' }
+    - { resource: 'packages/knp_paginator.yml' }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration

@@ -57,7 +57,7 @@ class AuthorManager
                 );
         }
 
-        return $authors->getQuery()->getResult();
+        return $authors->getQuery();
     }
 
 }

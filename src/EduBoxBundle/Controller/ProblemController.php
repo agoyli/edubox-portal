@@ -7,6 +7,7 @@ namespace EduBoxBundle\Controller;
 use EduBoxBundle\Entity\Problem;
 use EduBoxBundle\Entity\User;
 use EduBoxBundle\Form\Type\CodeSubmitType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,11 +20,15 @@ class ProblemController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route(path="/problem/list", name="edubox_problem_list")
      */
-    public function listAction(Request $request)
+    public function listAction(Request $request, PaginatorInterface $paginator)
     {
         $problemManager = $this->get('edubox_problem_manager');
         return $this->render('@EduBox/Front/problem/list.html.twig', [
-            'problems' => $problemManager->getProblemsBy($request),
+            'problems' => $paginator->paginate(
+                $problemManager->getProblemsBy($request),
+                $request->query->getInt('page', 1),
+                12
+            ),
             'categories' =>  $problemManager->getCategories(),
             'tags' =>  $problemManager->getTags(),
         ]);

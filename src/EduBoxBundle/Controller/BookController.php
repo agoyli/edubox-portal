@@ -8,6 +8,7 @@ use Application\Sonata\MediaBundle\Entity\Media;
 use EduBoxBundle\Entity\Author;
 use EduBoxBundle\Entity\Book;
 use Endroid\QrCode\QrCode;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,11 +21,15 @@ class BookController extends Controller
      *
      * @Route(path="/book/list", name="edubox_book_list")
      */
-    public function listAction(Request $request)
+    public function listAction(Request $request, PaginatorInterface $paginator)
     {
         $bookManager = $this->get('edubox_book_manager');
         return $this->render('@EduBox/Front/book/list.html.twig', [
-            'books' => $bookManager->getBooksBy($request),
+            'books' => $paginator->paginate(
+                    $bookManager->getBooksBy($request),
+                    $request->query->getInt('page', 1),
+                    8
+                ),
             'categories' =>  $bookManager->getCategories(),
             'tags' =>  $bookManager->getTags(),
             'authors' => $bookManager->getAuthors(),
