@@ -1,0 +1,61 @@
+{% extends '@EduBox/front_layout.html.twig' %}
+
+{% set title = 'QR kod arkaly kitap gözlegi' %}
+
+{% block front_title %}{{  parent() }} / {{ title }}{% endblock %}
+
+{% block content_header %}
+    <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block front_content %}
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <div class="box-title">
+                        Skaner
+                    </div>
+                </div>
+                <div class="box-body">
+                    <script type="text/javascript"  src="{{ asset('assets/libs/instascan/instascan.min.js') }}"></script>
+                    <video id="instascancam" style="transform: scaleX(-1);width: 100%;"></video>
+                    <script type="text/javascript">
+                        let scanner = new Instascan.Scanner({ video: document.getElementById('instascancam') });
+                        scanner.addListener('scan', function (content) {
+                            console.log(content);
+                        });
+                        Instascan.Camera.getCameras().then(function (cameras) {
+                            if (cameras.length > 0) {
+
+                                scanner.start(cameras[cameras.length-1]);
+                            } else {
+                                console.error('No cameras found.');
+                            }
+                        }).catch(function (e) {
+                            console.error(e);
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <div class="box-title">
+                        Kameralar
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <table class="table bordered-table">
+                        <tr>
+                            <td>
+                                Camera1
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

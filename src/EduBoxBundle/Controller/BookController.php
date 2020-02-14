@@ -45,6 +45,15 @@ class BookController extends Controller
     }
 
     /**
+     * @return Response
+     * @Route(path="/qrcode/scanner", name="edubox_qrcode_scanner")
+     */
+    public function qrCodeAction()
+    {
+        return $this->render('@EduBox/Front/book/qrcode.html.twig');
+    }
+
+    /**
      * @param Book $book
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route(path="/book/{id}/download", name="edubox_book_download")

@@ -81,24 +81,10 @@
                         QR kod arkaly gözleg
                     </div>
                 </div>
-                <div class="box-body">
-                    <script type="text/javascript"  src="{{ asset('assets/libs/instascan/instascan.min.js') }}"></script>
-                    <video id="instascancam" style="transform: scaleX(-1);width: 100%;"></video>
-                    <script type="text/javascript">
-                        let scanner = new Instascan.Scanner({ video: document.getElementById('instascancam') });
-                        scanner.addListener('scan', function (content) {
-                            console.log(content);
-                        });
-                        Instascan.Camera.getCameras().then(function (cameras) {
-                            if (cameras.length > 0) {
-                                scanner.start(cameras[0]);
-                            } else {
-                                console.error('No cameras found.');
-                            }
-                        }).catch(function (e) {
-                            console.error(e);
-                        });
-                    </script>
+                <div class="box-body text-center">
+                    <a href="{{ path('edubox_qrcode_scanner') }}" class="btn btn-primary btn-lg">
+                        Skaner <i class="fa fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>

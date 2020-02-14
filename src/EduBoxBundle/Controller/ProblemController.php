@@ -15,6 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProblemController extends Controller
 {
     /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      * @Route(path="/problem/list", name="edubox_problem_list")
      */
     public function listAction(Request $request)
@@ -51,11 +53,6 @@ class ProblemController extends Controller
             'problem' => $problem,
             'codeForm' => isset($form) ? $form->createView() : null,
         ]);
-    }
-
-    public function executeAction()
-    {
-
     }
 
     /**
