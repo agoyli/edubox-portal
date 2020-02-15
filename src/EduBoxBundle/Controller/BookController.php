@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Router;
 
 class BookController extends Controller
 {
@@ -94,8 +95,8 @@ class BookController extends Controller
     public function getQrCode(Book $book)
     {
         $qrCode = new QrCode();
-        $qrCode->setText('http://portal.edubox.pw'.
-            $this->generateUrl('edubox_book_show', ['id' => $book->getId()])
+        $qrCode->setText(
+            $this->generateUrl('edubox_book_show', ['id' => $book->getId()], Router::ABSOLUTE_URL)
         );
         $response = new Response($qrCode->writeString());
         $response->headers->set('Content-Type', $qrCode->getContentType());

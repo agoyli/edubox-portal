@@ -18,15 +18,10 @@ use EduBoxBundle\Entity\ProblemTest;
 use EduBoxBundle\Entity\Resource;
 use EduBoxBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\HttpKernel\Kernel;
 
 class EduBoxFixtures extends Fixture
 {
-    use ContainerAwareTrait;
     public $kernelRootDir;
-
-
-
 
     public function load(ObjectManager $manager)
     {

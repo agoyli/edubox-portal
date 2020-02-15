@@ -31,6 +31,9 @@ class Builder implements ContainerAwareInterface
         $menu
             ->addChild('Meseleler', ['route' => 'edubox_problem_list'])
             ->setAttribute('icon', '<i class="fa fa-cube"></i>');
+        $menu
+            ->addChild('Habarlaşmak', ['route' => 'edubox_contact'])
+            ->setAttribute('icon', '<i class="fa fa-envelope"></i>');
 
         return $menu;
     }
