@@ -63,7 +63,10 @@ class BookManager
         if (strlen($search) > 0) {
             $books
                 ->andWhere(
-                    $books->expr()->like('CONCAT(lower(b.name),lower(b.description))', $books->expr()->literal('%'.strtolower($search).'%'))
+                    $books->expr()->orX(
+                        $books->expr()->like('lower(b.name)', $books->expr()->literal('%'.strtolower($search).'%')),
+                        $books->expr()->like('lower(b.description)', $books->expr()->literal('%'.strtolower($search).'%'))
+                    )
                 );
         }
 

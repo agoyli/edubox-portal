@@ -46,9 +46,9 @@ class ResourceManager
         if (strlen($search) > 0) {
             $resources
                 ->andWhere(
-                    $resources->expr()->like(
-                        'CONCAT(lower(r.name),lower(r.content))',
-                        $resources->expr()->literal('%'.$search.'%')
+                    $resources->expr()->orX(
+                        $resources->expr()->like('lower(r.name)', $resources->expr()->literal('%'.strtolower($search).'%')),
+                        $resources->expr()->like('lower(r.content)', $resources->expr()->literal('%'.strtolower($search).'%'))
                     )
                 );
         }

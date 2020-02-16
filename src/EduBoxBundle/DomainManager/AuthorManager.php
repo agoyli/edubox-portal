@@ -50,9 +50,9 @@ class AuthorManager
         if (strlen($search) > 0) {
             $authors
                 ->andWhere(
-                    $authors->expr()->like(
-                        'CONCAT(lower(a.content),lower(a.fullName))',
-                        $authors->expr()->literal('%'.strtolower(trim($search)).'%')
+                    $authors->expr()->orX(
+                        $authors->expr()->like('lower(a.fullName)', $authors->expr()->literal('%'.strtolower($search).'%')),
+                        $authors->expr()->like('lower(a.content)', $authors->expr()->literal('%'.strtolower($search).'%'))
                     )
                 );
         }

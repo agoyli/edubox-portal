@@ -45,7 +45,10 @@ class ProblemManager
         if (strlen($search) > 0) {
             $problems
                 ->andWhere(
-                    $problems->expr()->like('CONCAT(lower(p.name),lower(p.description))', $problems->expr()->literal('%'.$search.'%'))
+                    $problems->expr()->orX(
+                        $problems->expr()->like('lower(p.name)', $problems->expr()->literal('%'.strtolower($search).'%')),
+                        $problems->expr()->like('lower(p.description)', $problems->expr()->literal('%'.strtolower($search).'%'))
+                    )
                 );
         }
 
