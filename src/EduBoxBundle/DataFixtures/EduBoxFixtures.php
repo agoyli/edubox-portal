@@ -286,7 +286,11 @@ class EduBoxFixtures extends Fixture
         // Create authors
         $authors = [
             "1" => ["fullname" => "Gurbannazar Ezizow"],
-            "3" => ["fullname" => "Nurmyrat Saryhanow"],
+            "3" => [
+                "fullname" => "Nurmyrat Saryhanow",
+                "image" => "uploads/image/author/3.jpg",
+                "content" => "1906-njy ýylda Gökdepe etrabynyň ikinji Gökdepe obasynda garyp daýhan maşgalasynda eneden dogulýar. Ol ilki oba mekdebinde okaýar. 1925-nji ýylda onuň kakasy Aşgabat etrabynyň Gökje obasyna göçüp gelýär. Ýaşlykda okamaga bolan höwes ony Aşgabatdaky politehnikuma alyp gelýär. Tehnikumda Nurmyrat üstünlik bilen okaýar hem şonuň bilen bir wagtda “Türkmenistan” gazetiniň redaksiýasynda işleýär. 1928-nji ýylda Nurmyrat Saryhanow Daşkende okuwa gidýär. Ol ýerde žurnalistleriň bir ýyllyk kursyny gutarýar. Ol 1929-njy ýyldan tä 1937-nji ýyla çenli Goşun hatarynda gulluk edýär. Bu ýyllar Nurmyrat uly terbiýeçilik mekdebini geçýär. Onuň syýasy taýýarlygy ösýär. Bilim derejesi artýar. Köpçülik işlerine işjeň gatnaşýar. “Gyzyl goşun” atly harby gazetiň jogapkär sekretary bolup işleýär. N.Saryhanow 1937-41-nji ýyllarda dürli gazetleriň redaksiýalarynda, “Sowet edebiýaty”, “Garagum” žurnalynda işleýär. Metbugat işi bilen aragatnaşyk saklamagy ony edebiýat meýdanyna çykarýar. N.Saryhanow zähmetsöýer, joşgunly watançydyr. Beýik Watançylyk Urşy başlanan wagtynda ol meýletinlik bilen Watan goragyna gidip, özüniň ýiti galamy, ötgür ýaragy bilen faşistlara garşy batyrgaý söweşýär. 1944-nji ýylyň maý aýynyň 4-ne Gitlere garşy söweş meýdanynda gahrymanlarça wepat bolýar.<br>N.Saryhanow türkmen prozasynyň taryhyna “Şirin”, “Kitap”, “Arzuw”, “Soňky öý”, “Ak tam”, “Giýew” ýaly hekaýalary, “Şükür bagşy”, “Ýagtylyga çykanlar”, “Gyzgyn günler” ýaly powesleriň \"Hossarlygy”, “Aýjemal”, “Garaş aga”, “Ene” ýaly oçerklerini goşmak bilen özüne müdümi ýadygärlik galdyrdy. Olar çuň ideýaly, joşgunly watançylyk, dostluk, gumanistik, internalistik ideýalary duýgulara ýugrulan eserlerdir.<br>N.Saryhanowyň eserleri türkmen dilinde we goňşy halklaryň birnäçesiniň dilinde ençeme gezek neşir edildi we edilýär.<br>",
+            ],
             "4" => ["fullname" => "Kerim Gurbannepesow"],
             "8" => ["fullname" => "Gurbanaly Magrupy"],
         ];
@@ -294,7 +298,16 @@ class EduBoxFixtures extends Fixture
             $author = new Author();
             $author->setFullName($item['fullname']);
             $author->setId($key);
+            if (isset($item['content'])) $author->setContent($item['content']);
             $manager->persist($author);
+            if (isset($item['image'])) {
+                $image = new Media();
+                $image->setBinaryContent(realpath($this->kernelRootDir).'/web/'.$item['image']);
+                $image->setContext('book');
+                $image->setCategory($contexts['book']['context']->category);
+                $image->setProviderName('sonata.media.provider.image');
+                $author->setImage($image);
+            }
             $authors[$key]["author"] = $author;
         }
         $manager->flush();
@@ -302,7 +315,16 @@ class EduBoxFixtures extends Fixture
         // Create books
         $books = [
             ["name" => "Saýlanan eserler", "year" => "1995", "pages" => "262", "author" => "1", "bookfile" => "uploads/pdf/1.pdf", "bookImage" => "uploads/image/book/1.png"],
-            ["name" => "Şükür bagşy", "year" => "1961", "pages" => "53", "author" => "3", "bookfile" => "uploads/pdf/3.pdf", "bookImage" => "uploads/image/book/3.png"],
+            [
+                "name" => "Şükür bagşy",
+                "year" => "1961",
+                "pages" => "53",
+                "author" => "3",
+                "bookfile" => "uploads/pdf/3.pdf",
+                "bookImage" => "uploads/image/book/3.png",
+                "description" => "Ýazyjynyň döreden powestleriniň arasynda onuň adyna şöhrat getireni “Şükür bagşy” powestidir. Bu eseri N.Saryhanow urşa gitmeziniň öň ýanynda (1942) ýazyp gutarýar. Bu powest türkmen halkynyň milli saz sungatyna, onuň at owazasyny ýokary derejä göteren belli sazanda Şükür bagşy barada. Eserde suratlandyrylýan waka hakyky durmuşdan, ýagny XIX asyryň ahyrlarynda – 1871-nji ýyl töwereginde Duşak sebitinde bolup geçipdir.<br>Halkyň arasynda ady belli bolan sazanda Şükür bagşy şol ýyllar otuz ýaşlary töweregindedi. Şükür bagşy sazandady. Ol obama-oba aýlanyp, halka hezil bererdi. Ýaryşda Şükür bagşy hem Gulamyň başlan heňini çalyp başlaýar. Gulam kowýar. Birnäçe heň çalynýar. Gulam hem elde baryny edýär, asla galar ýaly däl. Soňky heň çalynýar. Bu heňi Şükür şu jedelli ýaryş edip otyrka döredipdir. Ol “Ellerini başynyň üstünden aýlap-aýlap çalýar. Şunuň ýaly edip, Gulam bagşyny eýerdip barýarka, birden elini ýöne dutaryň ýüzünde aýlap-aýlap göýberdi-de, çalyp barýan heňiňiň soňuny perdelerden çykýan ses bilen doldurdy”. Gulam bu sesiň nirelerden çykýandygyny duýman galýar. Ol “Hyrçyny dişläp, başyny ýaýkady-da?”-Ah-ah, myhmanyň pylly-pyllysy çohdy” diýip, ýüzüni aşak salýar. Şükür bagşy üstün çykýar, doganyny azat edip, obasyna dolanyp gelýär.<br>Powestiň baş gahrymany Şükür bagşy 97 ýaşap 1928-nji ýylda aradan çykan tanymal saz ussady.",
+
+            ],
             ["name" => "Oýlanma baýry", "year" => "1995", "pages" => "437", "author" => "4", "bookfile" => "uploads/pdf/4.pdf", "bookImage" => "uploads/image/book/4.png"],
             ["name" => "Magrupy", "year" => "1991", "pages" => "48", "author" => "8", "bookfile" => "uploads/pdf/8.pdf", "bookImage" => "uploads/image/book/8.png"],
         ];
@@ -326,6 +348,7 @@ class EduBoxFixtures extends Fixture
             $book = new Book();
             $book->setBookFile($bookFile);
             $book->setBookImage($bookImage);
+            if (isset($item['description'])) $book->setDescription($item['description']);
             $book->setName($item["name"]);
             if ((int)$item["year"] > 0) $book->setYear((int)$item["year"]);
             $tmp = explode(',', $item['author']);

@@ -36,7 +36,7 @@ class SubmissionManager
 
     public function getHost()
     {
-        return 'https://api.judge0.com';
+        return 'http://judge0-api-v150_api_1:3000';
     }
 
     public function getLanguages()
@@ -127,7 +127,7 @@ class SubmissionManager
             }
             return $this->setNextTest($submission);
         }
-        throw new \Exception('Unable get token for execution. Data:  '.json_encode($result));
+        throw new \Exception('Unable get token for execution. Data:  '.json_encode($result).$this->getHost().file_get_contents($this->getHost().'/languages'));
     }
 
     /**

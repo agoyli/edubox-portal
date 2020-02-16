@@ -57,6 +57,7 @@
                         let scanner = new Instascan.Scanner({ video: document.getElementById('instascancam') });
                         scanner.addListener('scan', function (content) {
                             if (validURL(content)) {
+                                window.location.href = content;
                                 $("#scanner_result_table").append(
                                     "<tr>" +
                                     "<td>" +

@@ -47,11 +47,11 @@
                         {% if book.authors|length > 0 %}
                             <li class="list-group-item">
                                 <b>Awtor</b>
-                                <a class="pull-right">
+                                <p class="pull-right">
                                     {% for author in book.authors %}
-                                        {{ author.fullName }}{% if not loop.last %}, {% endif %}
+                                        <a href="{{ path('edubox_author_show', {'id': author.id}) }}">{{ author.fullName }}</a>{% if not loop.last %}, {% endif %}
                                     {% endfor %}
-                                </a>
+                                </p>
                             </li>
                         {% endif %}
                         {% if book.pageCount %}
