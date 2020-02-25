@@ -4,6 +4,14 @@
     padding-bottom: 140% !important;
 }
 
+.book-title {
+    min-height: 56px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
 #ace-editor {
     height: 400px;
 }
