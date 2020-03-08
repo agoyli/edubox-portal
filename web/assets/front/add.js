@@ -3,7 +3,7 @@ $(document).ready(function () {
     if (typeof ace !== 'undefined') {
         var editor = ace.edit("ace-editor");
         editor.session.setMode("ace/mode/python");
-        editor.setTheme("ace/theme/monokai");
+        //editor.setTheme("ace/theme/monokai");
         var textarea = $('#code_submit_code').hide();
         editor.session.setValue(textarea.val());
         editor.session.on('change', function(){

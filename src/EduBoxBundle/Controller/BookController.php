@@ -28,7 +28,7 @@ class BookController extends Controller
             'books' => $paginator->paginate(
                     $bookManager->getBooksBy($request),
                     $request->query->getInt('page', 1),
-                    8
+                    24
                 ),
             'categories' =>  $bookManager->getCategories(),
             'tags' =>  $bookManager->getTags(),

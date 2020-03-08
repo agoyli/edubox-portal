@@ -57,6 +57,14 @@ services:
         manager_type: orm
         show_in_dashboard: false
 
+  edubox_admin_problem_code:
+    class: EduBoxBundle\Admin\ProblemCodeAdmin
+    arguments: [~, EduBoxBundle\Entity\ProblemCode, ~]
+    tags:
+      - name: sonata.admin
+        manager_type: orm
+        show_in_dashboard: false
+
   edubox_submission_manager:
     class: EduBoxBundle\DomainManager\SubmissionManager
     arguments: ['@doctrine.orm.entity_manager']

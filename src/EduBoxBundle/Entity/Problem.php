@@ -2,7 +2,6 @@
 
 namespace EduBoxBundle\Entity;
 
-use Application\Sonata\ClassificationBundle\Entity\Category;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -76,9 +75,16 @@ class Problem
      */
     private $tags;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="EduBoxBundle\Entity\ProblemCode", mappedBy="problem", cascade={"persist"})
+     */
+    private $codes;
+
     public function __construct()
     {
         $this->tests = new ArrayCollection();
+        $this->codes = new ArrayCollection();
     }
 
 
@@ -210,6 +216,30 @@ class Problem
     public function addTest($test)
     {
         $this->tests->add($test);
+    }
+
+    /**
+     * @param $codes
+     * @return $this
+     */
+    public function setCodes($codes)
+    {
+        $this->codes = $codes;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCodes()
+    {
+        return $this->codes;
+    }
+
+    public function addCode($code)
+    {
+        $this->codes->add($code);
     }
 
     /**

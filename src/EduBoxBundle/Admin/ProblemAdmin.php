@@ -58,6 +58,11 @@ class ProblemAdmin extends AbstractAdmin
                 'edit' => 'inline',
                 'inline' => 'table',
                 'link_parameters' => ['problem_id' => $this->getSubject()->getId()],
+            ])
+            ->add('codes', CollectionType::class, [], [
+                'edit' => 'inline',
+                'inline' => 'table',
+                'link_parameters' => ['problem_id' => $this->getSubject()->getId()],
             ]);
     }
 

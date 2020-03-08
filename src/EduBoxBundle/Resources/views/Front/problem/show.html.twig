@@ -35,7 +35,7 @@
                         </thead>
                         <tbody>
                         {% for test in problem.tests %}
-                            {% if loop.index < 4 %}
+                            {% if loop.index < 2 %}
                                 <tr>
                                     <td><pre>{{ test.input }}</pre></td>
                                     <td><pre>{{ test.output }}</pre></td>
@@ -46,13 +46,17 @@
                     </table>
                 </div>
             </div>
-            <div class="box box-primary box-solid" id="code_submit_box">
+            <div class="box box-primary box-solid collapsed-box" id="code_submit_box">
                 <div class="overlay" hidden="hidden">
                     <i class="fa fa-refresh fa-spin"></i>
                 </div>
                 <div class="box-header">
                     <div class="box-title">
                         Jogabyny ibermek
+                    </div>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="box-body">
@@ -79,7 +83,6 @@
                     {% endif %}
                 </div>
             </div>
-
             <div class="box box-primary box-solid" id="submission_box" hidden="hidden">
                 <div class="box-header">
                     <div class="box-title">Netije</div>
@@ -119,6 +122,34 @@
                     </table>
                 </div>
             </div>
+            {% if problem.codes|length > 0 %}
+                <div class="box box-primary box-solid collapsed-box">
+                    <div class="overlay" hidden="hidden">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                    <div class="box-header">
+                        <div class="box-title">
+                            Jogaplar
+                        </div>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body no-padding">
+                        <table class="table">
+                                {% for code in problem.codes %}
+                                    <tr>
+                                        <td>
+                                            <pre><code class="language-{{ code.languageName }}">{{ code.code }}</code></pre>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+
         </div>
         <div class="col-md-3">
             <div class="box box-primary box-solid">
@@ -168,6 +199,8 @@
         </div>
     </div>
     <script src="{{ asset('assets/libs/ace/ace-builds-master/src-min/ace.js') }}"></script>
-    <script src="{{ asset('assets/libs/ace/ace-builds-master/src-min/theme-monokai.js') }}"></script>
+    <!--<script src="{{ asset('assets/libs/ace/ace-builds-master/src-min/theme-monokai.js') }}"></script>-->
     <script src="{{ asset('assets/libs/ace/ace-builds-master/src-min/mode-python.js') }}"></script>
+    <script src="{{ asset('assets/libs/prismjs/prism.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('assets/libs/prismjs/prism.css') }}">
 {% endblock %}
