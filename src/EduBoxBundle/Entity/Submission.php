@@ -126,7 +126,7 @@ class Submission
 
     /**
      * @var
-     * @ORM\Column(name="stdout", type="string", length=512, nullable=true)
+     * @ORM\Column(name="stdout", type="string", length=2048, nullable=true)
      */
     private $stdout;
 
